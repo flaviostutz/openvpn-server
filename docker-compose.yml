@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+
+  openvpn-server:
+    build: .
+    environment:
+      - DEBUG=0
+      - PUBLIC_CONNECTION_URL=tcp://192.168.20.23:1194
+    ports:
+      - 1194:1194
+    privileged: true
+    # command: sleep 99999
