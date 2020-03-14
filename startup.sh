@@ -45,17 +45,17 @@ if [ ! -f /etc/openvpn/init ]; then
     easyrsa build-client-full $CLIENTNAME nopass
     ovpn_getclient $CLIENTNAME > /etc/openvpn/$CLIENTNAME.ovpn
 
-    if [ "$PUSH_CLIENT_ROUTE" != "" ];then
-        echo "route $PUSH_CLIENT_ROUTE" >> /etc/openvpn/$CLIENTNAME.ovpn
-    fi
+    # if [ "$PUSH_CLIENT_ROUTE" != "" ];then
+    #     echo "route $PUSH_CLIENT_ROUTE" >> /etc/openvpn/$CLIENTNAME.ovpn
+    # fi
     
-    if [ "$PUSH_CLIENT_ROUTE2" != "" ];then
-        echo "route $PUSH_CLIENT_ROUTE2" >> /etc/openvpn/$CLIENTNAME.ovpn
-    fi
+    # if [ "$PUSH_CLIENT_ROUTE2" != "" ];then
+    #     echo "route $PUSH_CLIENT_ROUTE2" >> /etc/openvpn/$CLIENTNAME.ovpn
+    # fi
     
-    if [ "$PUSH_CLIENT_ROUTE3" != "" ];then
-        echo "route $PUSH_CLIENT_ROUTE3" >> /etc/openvpn/$CLIENTNAME.ovpn
-    fi
+    # if [ "$PUSH_CLIENT_ROUTE3" != "" ];then
+    #     echo "route $PUSH_CLIENT_ROUTE3" >> /etc/openvpn/$CLIENTNAME.ovpn
+    # fi
     
 
     touch /etc/openvpn/init
