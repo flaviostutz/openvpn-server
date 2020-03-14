@@ -46,8 +46,8 @@ services:
 
 * PUSH_DEFAULT_GATEWAY - Whatever push an instruction to clients telling them to route all its traffic through this VPN connection of just routes defined by PUSH_CLIENT ROUTE. defaults to 'false'
 
-* PUSH_CLIENT_ROUTE - Routes defined here will be used by client machines to decide on which local traffic will be routed through the VPN, so that it arrives the server. defaults to '192.168.1.0 255.255.255.0'
+* PUSH_CLIENT_ROUTE - Routes defined here will be used by client machines to decide on which local traffic will be routed through the VPN, so that it arrives the server. defaults to '10.0.0.0 255.0.0.0'
 
-* PUSH_CLIENT_ROUTE2 - additional client route
+* PUSH_CLIENT_ROUTE2 - additional client route. defaults to '192.168.0.0 255.255.0.0'
 
-* PUSH_CLIENT_ROUTE3 - additional client route
+* PUSH_CLIENT_ROUTE3 - additional client route. defaults to 172.16.0.0 255.255.0.0
