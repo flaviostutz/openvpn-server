@@ -45,6 +45,12 @@ if [ ! -f /etc/openvpn/init ]; then
     easyrsa build-client-full $CLIENTNAME nopass
     ovpn_getclient $CLIENTNAME > /etc/openvpn/$CLIENTNAME.ovpn
 
+    echo "ping 10" >> /etc/openvpn/$CLIENTNAME.ovpn
+    echo "ping-restart 60" >> /etc/openvpn/$CLIENTNAME.ovpn
+
+    echo "ping 10" >> /etc/openvpn/openvpn.conf
+    echo "ping-restart 120" >> /etc/openvpn/openvpn.conf
+
     # if [ "$PUSH_CLIENT_ROUTE" != "" ];then
     #     echo "route $PUSH_CLIENT_ROUTE" >> /etc/openvpn/$CLIENTNAME.ovpn
     # fi
