@@ -48,6 +48,7 @@ if [ ! -f /etc/openvpn/init ]; then
     echo "ping 10" >> /etc/openvpn/$CLIENTNAME.ovpn
     echo "ping-restart 60" >> /etc/openvpn/$CLIENTNAME.ovpn
 
+    # sed -i 's/keepalive/#keepalive/g' /etc/openvpn/openvpn.conf
     echo "ping 10" >> /etc/openvpn/openvpn.conf
     echo "ping-restart 120" >> /etc/openvpn/openvpn.conf
 
