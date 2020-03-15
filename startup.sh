@@ -46,6 +46,9 @@ if [ ! -f /etc/openvpn/init ]; then
     ovpn_getclient $CLIENTNAME > /etc/openvpn/$CLIENTNAME.ovpn
 
     echo "duplicate-cn" >> /etc/openvpn/openvpn.conf
+    echo "topology subnet" >> /etc/openvpn/openvpn.conf
+
+    echo "comp-lzo no" >> /etc/openvpn/$CLIENTNAME.ovpn
 
     touch /etc/openvpn/init
 
