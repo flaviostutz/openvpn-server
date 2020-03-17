@@ -31,8 +31,18 @@ if [ ! -f /etc/openvpn/init ]; then
     if [ "$PUSH_CLIENT_ROUTE3" != "" ]; then
         export PC3="-proute $PUSH_CLIENT_ROUTE3"
     fi
-    ovpn_genconfig -u $PUBLIC_CONNECTION_URL "$DG" "$PC1" "$PC2" "$PC3"
+    export PC4=""
+    if [ "$PUSH_CLIENT_ROUTE4" != "" ]; then
+        export PC4="-proute $PUSH_CLIENT_ROUTE4"
+    fi
 
+    ovpn_genconfig -u $PUBLIC_CONNECTION_URL "$DG" "$PC1" "$PC2" "$PC3" "$PC4"
+
+    echo "topology subnet" >> /etc/openvpn/openvpn.conf
+    echo "explicit-exit-notify 1" >> /etc/openvpn/openvpn.conf
+    if [ "$ACCEPT_DUPLICATE_CN" == "true" ]; then
+        echo "duplicate-cn" >> /etc/openvpn/openvpn.conf
+    fi
 
 
     echo ">>> Initializing PKI..."
@@ -43,12 +53,11 @@ if [ ! -f /etc/openvpn/init ]; then
 
     echo ">>> Generating OpenVPN client configuration..."
     easyrsa build-client-full $CLIENTNAME nopass
+
     ovpn_getclient $CLIENTNAME > /etc/openvpn/$CLIENTNAME.ovpn
-
-    echo "duplicate-cn" >> /etc/openvpn/openvpn.conf
-    echo "topology subnet" >> /etc/openvpn/openvpn.conf
-
+    echo "resolv-retry infinite" >> /etc/openvpn/$CLIENTNAME.ovpn
     echo "comp-lzo no" >> /etc/openvpn/$CLIENTNAME.ovpn
+
 
     touch /etc/openvpn/init
 
@@ -56,8 +65,16 @@ else
     echo "Reusing OpenVPN configuration files"
 fi
 
-echo "/etc/openvpn/openvpn.conf"
+echo "CLIENT CONFIGURATION"
+echo "######################"
+cat /etc/openvpn/$CLIENTNAME.ovpn
+echo "######################"
+echo ""
+echo "SERVER CONFIGURATION - /etc/openvpn/openvpn.conf"
+echo "######################"
 cat /etc/openvpn/openvpn.conf
+echo "######################"
+echo ""
 
 echo ">>> Starting OpenVPN server..."
 ovpn_run
