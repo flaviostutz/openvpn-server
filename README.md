@@ -1,4 +1,7 @@
 # openvpn-server
+
+[<img src="https://img.shields.io/docker/automated/flaviostutz/openvpn-server"/>](https://hub.docker.com/r/flaviostutz/openvpn-server)
+
 OpenVPN server container. Based on https://github.com/kylemanna/docker-openvpn
 
 ## Server Usage
